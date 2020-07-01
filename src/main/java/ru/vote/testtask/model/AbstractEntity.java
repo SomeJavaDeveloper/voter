@@ -2,6 +2,8 @@ package ru.vote.testtask.model;
 
 public abstract class AbstractEntity {
 
+    public static final int START_SEQ = 100000;
+
     protected Integer id;
 
     protected String name;
