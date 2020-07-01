@@ -32,6 +32,10 @@ public abstract class AbstractEntity {
         this.name = name;
     }
 
+    public boolean isNew(){
+        return id == null;
+    }
+
     @Override
     public String toString() {
         return "AbstractEntity{" +

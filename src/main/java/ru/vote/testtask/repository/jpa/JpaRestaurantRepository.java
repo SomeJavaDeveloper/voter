@@ -1,13 +1,11 @@
 package ru.vote.testtask.repository.jpa;
 
+import ru.vote.testtask.model.Meal;
 import ru.vote.testtask.model.Restaurant;
 import ru.vote.testtask.repository.RestaurantRepository;
 import ru.vote.testtask.to.RestaurantTo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -23,14 +21,26 @@ public class JpaRestaurantRepository implements RestaurantRepository {
 //    }
     private AtomicInteger currentId = new AtomicInteger(5);
 
-    private Map<Integer, Restaurant> restaurantMap = new HashMap<>();
+    public static Map<Integer, Restaurant> restaurantMap = new HashMap<>();
 
 
-    {
-        restaurantMap.put(1, new Restaurant(1, "rest_1", null, "rest_1_desc"));
-        restaurantMap.put(2, new Restaurant(2, "rest_2", null, "rest_2_desc"));
-        restaurantMap.put(3, new Restaurant(3, "rest_3", null, "rest_3_desc"));
-        restaurantMap.put(4, new Restaurant(4, "rest_4", null, "rest_4_desc"));
+    static {
+        restaurantMap.put(1, new Restaurant(1, "rest_1", Arrays.asList(
+                new Meal(1, "rest_1_meal_1", 10),
+                new Meal(2, "rest_1_meal_2", 20)
+        ), "rest_1_desc"));
+        restaurantMap.put(2, new Restaurant(2, "rest_2", Arrays.asList(
+                new Meal(1, "rest_2_meal_1", 30),
+                new Meal(2, "rest_2_meal_2", 40)
+        ), "rest_2_desc"));
+        restaurantMap.put(3, new Restaurant(3, "rest_3", Arrays.asList(
+                new Meal(1, "rest_3_meal_1", 50),
+                new Meal(2, "rest_3_meal_2", 60)
+        ), "rest_3_desc"));
+        restaurantMap.put(4, new Restaurant(4, "rest_4", Arrays.asList(
+                new Meal(1, "rest_4_meal_1", 70),
+                new Meal(2, "rest_4_meal_2", 280)
+        ), "rest_4_desc"));
     }
 
     @Override

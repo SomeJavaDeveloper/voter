@@ -15,7 +15,7 @@
         <c:forEach items="${restaurants}" var="restaurant">
             <jsp:useBean id="restaurant" type="ru.vote.testtask.to.RestaurantTo"/>
 
-            <h3><a href="meals?restaurant_id=${restaurant.id}">${restaurant.name}</a></h3>
+            <h3><a href="restaurantMeals?restaurant_id=${restaurant.id}">${restaurant.name}</a></h3>
             <p>${restaurant.description}</p>
 
 <%--            только админ--%>

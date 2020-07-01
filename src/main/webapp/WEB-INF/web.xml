@@ -13,7 +13,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>mealServlet</servlet-name>
-        <url-pattern>/meals</url-pattern>
+        <url-pattern>/restaurantMeals</url-pattern>
     </servlet-mapping>
 
     <servlet>
