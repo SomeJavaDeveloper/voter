@@ -6,6 +6,7 @@
 
     <display-name>Voter</display-name>
 
+
     <servlet>
         <servlet-name>mealServlet</servlet-name>
         <servlet-class>ru.vote.testtask.web.MealServlet</servlet-class>

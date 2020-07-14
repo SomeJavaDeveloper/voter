@@ -28,6 +28,7 @@
             <dd><input type="text" value="${restaurant.description}" name="description" required></dd>
         </dl>
         <button type="submit">Save</button>
+<%--        передай параметы id и restaurant_id как параметры. url видит только get запрос--%>
         <button onclick="window.history.back()" type="button">Cancel</button>
     </form>
 </section>

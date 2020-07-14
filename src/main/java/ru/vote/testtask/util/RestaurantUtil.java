@@ -1,6 +1,8 @@
 package ru.vote.testtask.util;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.vote.testtask.model.Restaurant;
+import ru.vote.testtask.service.MealService;
 import ru.vote.testtask.to.RestaurantTo;
 
 import java.util.Collection;
@@ -9,6 +11,10 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class RestaurantUtil {
+
+    /////////////////
+    @Autowired
+    private static MealService service;
 
     private RestaurantUtil(){
 
@@ -26,6 +32,6 @@ public class RestaurantUtil {
     }
 
     private static RestaurantTo createTo(Restaurant restaurant){
-        return new RestaurantTo(restaurant.getId(), restaurant.getName(), restaurant.getMealList(), restaurant.getDescription());
+        return new RestaurantTo(restaurant.getId(), restaurant.getName(), service.getAll(restaurant.getId()), restaurant.getDescription());
     }
 }

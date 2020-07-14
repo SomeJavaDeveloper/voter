@@ -1,43 +1,52 @@
 package ru.vote.testtask.repository.jpa;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vote.testtask.model.Meal;
+import ru.vote.testtask.model.Restaurant;
 import ru.vote.testtask.repository.MealRepository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@Repository
+@Transactional(readOnly = true)
 public class JpaMealRepository implements MealRepository {
 
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
     public List<Meal> getAll(int restaurantId) {
-        return JpaRestaurantRepository.restaurantMap.get(restaurantId).getMealList();
+        return em.createNamedQuery(Meal.ALL_SORTED, Meal.class).getResultList();
     }
 
     @Override
-    public void delete(int restaurantId, int mealId) {
-        JpaRestaurantRepository.restaurantMap.get(restaurantId).getMealList().remove(mealId);
+    @Transactional
+    public boolean delete(int restaurantId, int mealId) {
+        return em.createNamedQuery(Meal.DELETE)
+                .setParameter("id", mealId)
+                .setParameter("restaurantId", restaurantId)
+                .executeUpdate() != 0;
     }
 
     @Override
     public Meal get(int restaurantId, int mealId) {
-        return JpaRestaurantRepository.restaurantMap.get(restaurantId).getMealList().get(mealId);
+        Meal meal = em.find(Meal.class, mealId);
+        return meal != null && meal.getRestaurant().getId() != restaurantId ? meal : null;
     }
 
     @Override
-    public Meal create(int restaurantId, Meal meal) {
-
-        if(meal.isNew()) {
-            meal.setId(JpaRestaurantRepository.restaurantMap.get(restaurantId).getMealList().size());
-            JpaRestaurantRepository.restaurantMap.get(restaurantId).getMealList().add(meal);
-        } else {
-            JpaRestaurantRepository.restaurantMap.get(restaurantId).getMealList().add(meal.getId(), meal);
+    @Transactional
+    public Meal save(int restaurantId, Meal meal) {
+        meal.setRestaurant(em.getReference(Restaurant.class, restaurantId));
+        if (meal.isNew()) {
+            em.persist(meal);
+            return meal;
+        } else if (get(meal.id(), restaurantId) == null) {
+            return null;
         }
-        return meal;
-    }
-
-    @Override
-    public Meal update(int restaurantId, Meal meal) {
-        JpaRestaurantRepository.restaurantMap.get(restaurantId).getMealList().add(meal.getId(), meal);
-        return meal;
+        return em.merge(meal);
     }
 }

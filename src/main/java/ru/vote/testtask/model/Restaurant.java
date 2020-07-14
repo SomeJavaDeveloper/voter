@@ -1,33 +1,36 @@
 package ru.vote.testtask.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
+@NamedQueries({
+        @NamedQuery(name = Restaurant.DELETE, query = "DELETE FROM Restaurant r WHERE r.id=:id"),
+        @NamedQuery(name = Restaurant.ALL_SORTED, query = "SELECT r FROM Restaurant r ORDER BY r.name")
+})
+@Entity
+@Table(name = "restaurants")
 public class Restaurant extends AbstractEntity {
 
-    private List<Meal> mealList;
+    public static final String DELETE = "User.delete";
+    public static final String ALL_SORTED = "User.getAllSorted";
 
+    @Column(name = "description", nullable = false)
+    @NotBlank
     private String description;
 
     public Restaurant() {
     }
 
-    public Restaurant(String name, List<Meal> mealList, String description) {
-        this(null, name, mealList, description);
+    public Restaurant(String name,  String description) {
+        this(null, name, description);
     }
 
-    public Restaurant(Integer id, String name, List<Meal> mealList, String description) {
+    public Restaurant(Integer id, String name, String description) {
         super(id, name);
-        this.mealList = mealList;
         this.description = description;
     }
 
-    public List<Meal> getMealList() {
-        return mealList;
-    }
-
-    public void setMealList(List<Meal> mealList) {
-        this.mealList = mealList;
-    }
 
     public String getDescription() {
         return description;
@@ -40,8 +43,7 @@ public class Restaurant extends AbstractEntity {
     @Override
     public String toString() {
         return "Restaurant{" +
-                "mealList=" + mealList +
-                ", description='" + description + '\'' +
+                " description='" + description + '\'' +
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 '}';

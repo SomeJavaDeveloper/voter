@@ -1,12 +1,17 @@
 package ru.vote.testtask.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import ru.vote.testtask.model.Restaurant;
 import ru.vote.testtask.service.RestaurantService;
 import ru.vote.testtask.to.MealTo;
 import ru.vote.testtask.to.RestaurantTo;
+import ru.vote.testtask.web.meal.MealRestController;
 import ru.vote.testtask.web.restaurant.RestaurantRestController;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,14 +22,21 @@ import java.util.Objects;
 
 public class RestaurantServlet extends HttpServlet {
 
-    private RestaurantRestController restaurantController = new RestaurantRestController();
+    //null
+    private RestaurantRestController restaurantController;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        WebApplicationContext springContext = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
+        restaurantController = springContext.getBean(RestaurantRestController.class);
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         Restaurant restaurant = new Restaurant(
                 req.getParameter("name"),
-                null,
                 req.getParameter("description")
         );
         if(StringUtils.isEmpty(req.getParameter("id"))){

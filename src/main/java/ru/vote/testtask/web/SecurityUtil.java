@@ -5,7 +5,7 @@ import ru.vote.testtask.model.AbstractEntity;
 
 public class SecurityUtil{
 
-    private static int id = AbstractEntity.START_SEQ;
+    private static int id = 0;
 
     private SecurityUtil() {
     }

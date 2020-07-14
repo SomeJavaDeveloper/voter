@@ -1,11 +1,22 @@
 package ru.vote.testtask.model;
 
+import org.springframework.util.Assert;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+@MappedSuperclass
+@Access(AccessType.FIELD)
 public abstract class AbstractEntity {
 
-    public static final int START_SEQ = 100000;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     protected Integer id;
 
+    @NotBlank
+    @Size(min = 1, max = 100)
+    @Column(name = "name", nullable = false)
     protected String name;
 
     public AbstractEntity() {
@@ -17,6 +28,12 @@ public abstract class AbstractEntity {
     }
 
     public Integer getId() {
+        return id;
+    }
+
+    // doesn't work for hibernate lazy proxy
+    public int id() {
+        Assert.notNull(id, "Entity must has id");
         return id;
     }
 

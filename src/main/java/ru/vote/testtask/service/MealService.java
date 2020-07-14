@@ -1,14 +1,20 @@
 package ru.vote.testtask.service;
 
+import org.springframework.stereotype.Service;
 import ru.vote.testtask.model.Meal;
 import ru.vote.testtask.repository.jpa.JpaMealRepository;
 import ru.vote.testtask.repository.jpa.JpaRestaurantRepository;
 
 import java.util.List;
 
+@Service
 public class MealService {
 
-    private final JpaMealRepository repository = new JpaMealRepository();
+    private final JpaMealRepository repository;
+
+    public MealService(JpaMealRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Meal> getAll(int restaurantId) {
         return repository.getAll(restaurantId);
@@ -23,10 +29,10 @@ public class MealService {
     }
 
     public Meal create(int restaurantId, Meal meal){
-        return repository.create(restaurantId, meal);
+        return repository.save(restaurantId, meal);
     }
 
     public Meal update(int restaurantId, Meal meal){
-        return repository.update(restaurantId, meal);
+        return repository.save(restaurantId, meal);
     }
 }

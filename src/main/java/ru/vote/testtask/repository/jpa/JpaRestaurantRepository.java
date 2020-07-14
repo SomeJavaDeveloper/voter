@@ -1,76 +1,50 @@
 package ru.vote.testtask.repository.jpa;
 
-import ru.vote.testtask.model.Meal;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vote.testtask.model.Restaurant;
 import ru.vote.testtask.repository.RestaurantRepository;
-import ru.vote.testtask.to.RestaurantTo;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
+@Repository
+@Transactional(readOnly = true)
 public class JpaRestaurantRepository implements RestaurantRepository {
 
-//    private List<Restaurant> restaurantList = new ArrayList<>();
-//
-//    {
-//        restaurantList.add(new Restaurant(1, "rest_1", null, "rest_1_desc"));
-//        restaurantList.add(new Restaurant(2, "rest_2", null, "rest_2_desc"));
-//        restaurantList.add(new Restaurant(3, "rest_3", null, "rest_3_desc"));
-//        restaurantList.add(new Restaurant(4, "rest_4", null, "rest_4_desc"));
-//    }
-    private AtomicInteger currentId = new AtomicInteger(5);
-
-    public static Map<Integer, Restaurant> restaurantMap = new HashMap<>();
-
-
-    static {
-        restaurantMap.put(1, new Restaurant(1, "rest_1", Arrays.asList(
-                new Meal(1, "rest_1_meal_1", 10),
-                new Meal(2, "rest_1_meal_2", 20)
-        ), "rest_1_desc"));
-        restaurantMap.put(2, new Restaurant(2, "rest_2", Arrays.asList(
-                new Meal(1, "rest_2_meal_1", 30),
-                new Meal(2, "rest_2_meal_2", 40)
-        ), "rest_2_desc"));
-        restaurantMap.put(3, new Restaurant(3, "rest_3", Arrays.asList(
-                new Meal(1, "rest_3_meal_1", 50),
-                new Meal(2, "rest_3_meal_2", 60)
-        ), "rest_3_desc"));
-        restaurantMap.put(4, new Restaurant(4, "rest_4", Arrays.asList(
-                new Meal(1, "rest_4_meal_1", 70),
-                new Meal(2, "rest_4_meal_2", 280)
-        ), "rest_4_desc"));
-    }
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
     public List<Restaurant> getAll() {
-        return new ArrayList<>(restaurantMap.values());
+        return em.createNamedQuery(Restaurant.ALL_SORTED, Restaurant.class).getResultList();
     }
 
     @Override
-    public void delete(int id) {
-        restaurantMap.remove(id);
+    @Transactional
+    public boolean delete(int id) {
+        return em.createNamedQuery(Restaurant.DELETE)
+                .setParameter("id", id)
+                .executeUpdate() != 0;
     }
 
     @Override
-    public Restaurant create(Restaurant restaurant) {
-        restaurant.setId(currentId.incrementAndGet());
-        return restaurantMap.put(restaurant.getId(), restaurant);
+    @Transactional
+    public Restaurant save(Restaurant restaurant) {
+        if(restaurant.isNew()) {
+            em.persist(restaurant);
+            return restaurant;
+        } else {
+            return em.merge(restaurant);
+        }
     }
 
-    @Override
-    public Restaurant update(Restaurant restaurant) {
-        return restaurantMap.put(restaurant.getId(), restaurant);
-    }
 
     @Override
     public Restaurant get(int id) {
-        return restaurantMap.get(id);
+        return em.find(Restaurant.class, id);
     }
 
-//    public boolean delete(int id){
-//
-//    }
 
 }

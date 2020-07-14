@@ -1,8 +1,27 @@
 package ru.vote.testtask.model;
 
-public class Meal extends AbstractEntity{
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+@NamedQueries({
+        @NamedQuery(name = Meal.ALL_SORTED, query = "SELECT m FROM Meal m WHERE m.restaurant.id=:restaurantId ORDER BY m.name DESC"),
+        @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id AND m.restaurant.id=:restaurantId"),
+})
+@Entity
+@Table(name = "meals", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id"}, name = "meals_unique_user_idx")})
+public class Meal extends AbstractEntity{
+    public static final String ALL_SORTED = "Meal.getAll";
+    public static final String DELETE = "Meal.delete";
+
+    @Column(name = "price", nullable = false)
+    @NotBlank
     private Integer price;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    @NotNull
+    private Restaurant restaurant;
 
     public Meal() {
     }
@@ -22,6 +41,14 @@ public class Meal extends AbstractEntity{
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     @Override

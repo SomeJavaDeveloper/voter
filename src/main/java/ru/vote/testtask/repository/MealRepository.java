@@ -8,12 +8,10 @@ public interface MealRepository {
 
     public List<Meal> getAll(int restaurantId);
 
-    public void delete(int restaurantId, int mealId);
+    public boolean delete(int restaurantId, int mealId);
 
     public Meal get(int restaurantId, int mealId);
 
-    public Meal create(int restaurantId, Meal meal);
-
-    public Meal update(int restaurantId, Meal meal);
+    public Meal save(int restaurantId, Meal meal);
 
 }

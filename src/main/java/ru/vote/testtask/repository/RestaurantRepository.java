@@ -10,11 +10,9 @@ public interface RestaurantRepository {
 
 //    public boolean delete(int id);
 
-    public void delete(int id);
+    public boolean delete(int id);
 
-    public Restaurant create(Restaurant restaurant);
-
-    public Restaurant update(Restaurant restaurant);
+    public Restaurant save(Restaurant restaurant);
 
     public Restaurant get(int id);
 }
