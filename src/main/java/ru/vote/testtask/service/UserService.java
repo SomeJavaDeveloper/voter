@@ -2,15 +2,15 @@ package ru.vote.testtask.service;
 
 import org.springframework.stereotype.Service;
 import ru.vote.testtask.model.User;
-import ru.vote.testtask.repository.jpa.JpaUserRepository;
+import ru.vote.testtask.repository.UserRepository;
 import java.util.List;
 
 @Service
 public class UserService {
 
-    private final JpaUserRepository repository;
+    private final UserRepository repository;
 
-    public UserService(JpaUserRepository repository) {
+    public UserService(UserRepository repository) {
         this.repository = repository;
     }
 

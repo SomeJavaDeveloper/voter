@@ -2,17 +2,16 @@ package ru.vote.testtask.service;
 
 import org.springframework.stereotype.Service;
 import ru.vote.testtask.model.Meal;
-import ru.vote.testtask.repository.jpa.JpaMealRepository;
-import ru.vote.testtask.repository.jpa.JpaRestaurantRepository;
+import ru.vote.testtask.repository.MealRepository;
 
 import java.util.List;
 
 @Service
 public class MealService {
 
-    private final JpaMealRepository repository;
+    private final MealRepository repository;
 
-    public MealService(JpaMealRepository repository) {
+    public MealService(MealRepository repository) {
         this.repository = repository;
     }
 

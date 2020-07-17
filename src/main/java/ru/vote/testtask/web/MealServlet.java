@@ -1,5 +1,7 @@
 package ru.vote.testtask.web;
 
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.StringUtils;
 import ru.vote.testtask.model.Meal;
 import ru.vote.testtask.model.Restaurant;
@@ -13,22 +15,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+
 
 public class MealServlet extends HttpServlet {
 
-    private RestaurantRestController restaurantController;
+    private ConfigurableApplicationContext springContext;
     private MealRestController mealController;
+    private RestaurantRestController restaurantController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        WebApplicationContext springContext = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
-        restaurantController = springContext.getBean(RestaurantRestController.class);
+        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml");
         mealController = springContext.getBean(MealRestController.class);
+        restaurantController = springContext.getBean(RestaurantRestController.class);
     }
 
+    @Override
+    public void destroy() {
+        springContext.close();
+        super.destroy();
+    }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");

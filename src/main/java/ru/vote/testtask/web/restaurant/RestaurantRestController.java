@@ -15,14 +15,13 @@ public class RestaurantRestController {
 
     private static final Logger log = LoggerFactory.getLogger(RestaurantRestController.class);
 
-    private RestaurantService service;
+    private final RestaurantService service;
 
     public RestaurantRestController(RestaurantService service) {
         this.service = service;
     }
 
     public List<RestaurantTo> getAll(){
-        log.info("getAll() restaurants");
         return RestaurantUtil.getTos(service.getAll());
     }
 

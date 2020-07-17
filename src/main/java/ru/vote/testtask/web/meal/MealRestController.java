@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import ru.vote.testtask.model.Meal;
-import ru.vote.testtask.repository.jpa.JpaRestaurantRepository;
 import ru.vote.testtask.service.MealService;
 import ru.vote.testtask.to.MealTo;
 import ru.vote.testtask.util.MealUtil;
@@ -16,7 +15,7 @@ public class MealRestController {
 
     private static final Logger log = LoggerFactory.getLogger(MealRestController.class);
 
-    private MealService service;
+    private final MealService service;
 
     public MealRestController(MealService service) {
         this.service = service;

@@ -8,11 +8,7 @@ import javax.validation.constraints.Size;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    protected Integer id;
+public abstract class AbstractEntity{
 
     @NotBlank
     @Size(min = 1, max = 100)
@@ -22,24 +18,11 @@ public abstract class AbstractEntity {
     public AbstractEntity() {
     }
 
-    public AbstractEntity(Integer id, String name) {
-        this.id = id;
+    public AbstractEntity(String name) {
         this.name = name;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
     // doesn't work for hibernate lazy proxy
-    public int id() {
-        Assert.notNull(id, "Entity must has id");
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -49,15 +32,10 @@ public abstract class AbstractEntity {
         this.name = name;
     }
 
-    public boolean isNew(){
-        return id == null;
-    }
-
     @Override
     public String toString() {
         return "AbstractEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 '}';
     }
 
@@ -68,12 +46,11 @@ public abstract class AbstractEntity {
             return false;
         }
         AbstractEntity that = (AbstractEntity) o;
-        return getId().equals(that.getId()) &&
-                getName().equals(that.getName());
+        return getName().equals(that.getName());
     }
 
     @Override
     public int hashCode() {
-        return id == null ? 0 : id;
+        return name == null ? 0 : Integer.parseInt(name);
     }
 }

@@ -1,9 +1,9 @@
 package ru.vote.testtask.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.StringUtils;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 import ru.vote.testtask.model.Restaurant;
 import ru.vote.testtask.service.RestaurantService;
 import ru.vote.testtask.to.MealTo;
@@ -22,14 +22,20 @@ import java.util.Objects;
 
 public class RestaurantServlet extends HttpServlet {
 
-    //null
+    private ConfigurableApplicationContext springContext;
     private RestaurantRestController restaurantController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        WebApplicationContext springContext = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
+        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml");
         restaurantController = springContext.getBean(RestaurantRestController.class);
+    }
+
+    @Override
+    public void destroy() {
+        springContext.close();
+        super.destroy();
     }
 
     @Override

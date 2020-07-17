@@ -1,5 +1,7 @@
 package ru.vote.testtask.model;
 
+import org.springframework.util.Assert;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -16,6 +18,12 @@ import java.util.Set;
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "users_unique_email_idx")})
 public class User extends AbstractEntity{
+    public static final int START_SEQ = 100000;
+
+    @Id
+    @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
+    protected Integer id;
 
     public static final String DELETE = "User.delete";
     public static final String BY_EMAIL = "User.getByEmail";
@@ -61,7 +69,8 @@ public class User extends AbstractEntity{
     }
 
     public User(Integer id, String name, String password, String email, boolean enabled, Date registered, Set<Role> roles) {
-        super(id, name);
+        super(name);
+        this.id = id;
         this.password = password;
         this.email = email;
         this.enabled = enabled;
@@ -117,6 +126,14 @@ public class User extends AbstractEntity{
         this.restaurant = restaurant;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -128,5 +145,14 @@ public class User extends AbstractEntity{
                 ", id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public int id() {
+        Assert.notNull(id, "Entity must has id");
+        return id;
+    }
+
+    public boolean isNew(){
+        return id == null;
     }
 }

@@ -3,7 +3,6 @@ package ru.vote.testtask.service;
 import org.springframework.stereotype.Service;
 import ru.vote.testtask.model.Restaurant;
 import ru.vote.testtask.repository.RestaurantRepository;
-import ru.vote.testtask.repository.jpa.JpaRestaurantRepository;
 import ru.vote.testtask.to.RestaurantTo;
 
 import java.util.List;
