@@ -1,8 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+<%--
+  Created by IntelliJ IDEA.
+  User: friday58
+  Date: 19.07.2020
+  Time: 0:47
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Voter</title>
 </head>
 <body>
 <h1>Restaurant vote</h1>

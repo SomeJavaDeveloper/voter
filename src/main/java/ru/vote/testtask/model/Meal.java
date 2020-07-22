@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @NamedQueries({
         @NamedQuery(name = Meal.ALL_SORTED, query = "SELECT m FROM Meal m WHERE m.restaurant.id=:restaurantId ORDER BY m.name DESC"),
-        @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id AND m.restaurant.id=:restaurantId"),
+        @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id"),
 })
 @Entity
 @Table(name = "meals", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id"}, name = "meals_unique_user_idx")})
@@ -24,7 +24,7 @@ public class Meal extends AbstractEntity{
     public static final String DELETE = "Meal.delete";
 
     @Column(name = "price", nullable = false)
-    @NotBlank
+    @NotNull
     private Integer price;
 
     @ManyToOne(fetch = FetchType.LAZY)

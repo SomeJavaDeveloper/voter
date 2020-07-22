@@ -18,8 +18,8 @@ public class JpaRestaurantRepository implements RestaurantRepository {
 
     @Override
     public List<Restaurant> getAll() {
-//        return em.createNamedQuery(Restaurant.ALL_SORTED, Restaurant.class).getResultList();
-        return em.createQuery("SELECT r FROM " + Restaurant.class.getName() + "r ORDER BY r.name", Restaurant.class).getResultList();
+        return em.createNamedQuery(Restaurant.ALL_SORTED, Restaurant.class).getResultList();
+//        return em.createQuery("SELECT r FROM " + Restaurant.class.getName() + " r", Restaurant.class).getResultList();
     }
 
     @Override

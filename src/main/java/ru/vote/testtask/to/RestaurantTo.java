@@ -10,14 +10,11 @@ public class RestaurantTo {
 
     private final String name;
 
-    private final List<Meal> mealList;
-
     private final String description;
 
-    public RestaurantTo(Integer id, String name, List<Meal> mealList, String description) {
+    public RestaurantTo(Integer id, String name, String description) {
         this.id = id;
         this.name = name;
-        this.mealList = mealList;
         this.description = description;
     }
 
@@ -29,9 +26,6 @@ public class RestaurantTo {
         return name;
     }
 
-    public List<Meal> getMealList() {
-        return mealList;
-    }
 
     public String getDescription() {
         return description;
@@ -42,7 +36,6 @@ public class RestaurantTo {
         return "RestaurantTo{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", mealList=" + mealList +
                 ", description='" + description + '\'' +
                 '}';
     }

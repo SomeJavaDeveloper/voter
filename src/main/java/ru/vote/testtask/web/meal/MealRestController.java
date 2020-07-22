@@ -26,9 +26,9 @@ public class MealRestController {
         return MealUtil.getTos(service.getAll(restaurantId));
     }
 
-    public void delete(int restaurantId, int mealId){
-        log.info("delete " + mealId + " from restaurant with id=" + restaurantId);
-        service.delete(restaurantId, mealId);
+    public void delete(int mealId){
+        log.info("delete " + mealId);
+        service.delete(mealId);
     }
 
     public Meal get(int restaurantId, int mealId){

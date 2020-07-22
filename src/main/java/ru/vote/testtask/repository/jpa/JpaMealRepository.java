@@ -19,15 +19,16 @@ public class JpaMealRepository implements MealRepository {
 
     @Override
     public List<Meal> getAll(int restaurantId) {
-        return em.createNamedQuery(Meal.ALL_SORTED, Meal.class).getResultList();
+        return em.createNamedQuery(Meal.ALL_SORTED, Meal.class).
+                setParameter("restaurantId", restaurantId).
+                getResultList();
     }
 
     @Override
     @Transactional
-    public boolean delete(int restaurantId, int mealId) {
+    public boolean delete(int mealId) {
         return em.createNamedQuery(Meal.DELETE)
                 .setParameter("id", mealId)
-                .setParameter("restaurantId", restaurantId)
                 .executeUpdate() != 0;
     }
 

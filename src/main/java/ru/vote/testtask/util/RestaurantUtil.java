@@ -12,10 +12,6 @@ import java.util.stream.Collectors;
 
 public class RestaurantUtil {
 
-    /////////////////
-    @Autowired
-    private static MealService service;
-
     private RestaurantUtil(){
 
     }
@@ -32,6 +28,6 @@ public class RestaurantUtil {
     }
 
     private static RestaurantTo createTo(Restaurant restaurant){
-        return new RestaurantTo(restaurant.getId(), restaurant.getName(), service.getAll(restaurant.getId()), restaurant.getDescription());
+        return new RestaurantTo(restaurant.getId(), restaurant.getName(), restaurant.getDescription());
     }
 }

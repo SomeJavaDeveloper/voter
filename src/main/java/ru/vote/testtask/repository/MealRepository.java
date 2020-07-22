@@ -8,7 +8,7 @@ public interface MealRepository {
 
     public List<Meal> getAll(int restaurantId);
 
-    public boolean delete(int restaurantId, int mealId);
+    public boolean delete(int mealId);
 
     public Meal get(int restaurantId, int mealId);
 

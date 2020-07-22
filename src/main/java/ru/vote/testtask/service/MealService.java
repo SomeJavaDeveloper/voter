@@ -19,8 +19,8 @@ public class MealService {
         return repository.getAll(restaurantId);
     }
 
-    public void delete(int restaurantId, int mealId){
-        repository.delete(restaurantId, mealId);
+    public void delete(int mealId){
+        repository.delete(mealId);
     }
 
     public Meal get(int restaurantId, int mealId){

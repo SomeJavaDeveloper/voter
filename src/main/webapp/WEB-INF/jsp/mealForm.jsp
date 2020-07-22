@@ -12,13 +12,13 @@
 </head>
 <body>
 <section>
-    <h3><a href="index.html">Home</a></h3>
+    <h3><a href="index.jsp">Home</a></h3>
     <hr>
     <h2>${param.action == 'create' ? 'Create meal' : 'Edit meal'}</h2>
-    <jsp:useBean id="meal" type="ru.vote.testtask.model.Meal" scope="request"/>
+    <jsp:useBean id="meal" class="ru.vote.testtask.model.Meal" scope="request"/>
     <form method="post" action="restaurantMeals">
         <input type="hidden" name="id" value="${meal.id}">
-        <input type="hidden" name="restaurantId" value="${param.restaurant_id}">
+        <input type="hidden" name="restaurantId" value="${restaurant.id}">
         <dl>
             <dt>Name:</dt>
             <dd><input type="text" value="${meal.name}" name="name" required></dd>

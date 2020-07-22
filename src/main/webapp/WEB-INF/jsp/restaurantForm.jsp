@@ -9,20 +9,20 @@
 <html>
 <head>
     <title>Restaurant</title>
+    <link rel="stylesheet" href="resources/css/style.css">
 </head>
 <body>
 <section>
     <h3><a href="index.html">Home</a></h3>
     <hr>
     <h2>${param.action == 'create' ? 'Create restaurant' : 'Edit restaurant'}</h2>
-    <jsp:useBean id="restaurant" type="ru.vote.testtask.model.Restaurant" scope="request"/>
+    <jsp:useBean id="restaurant" class="ru.vote.testtask.model.Restaurant" scope="request"/>
     <form method="post" action="restaurants">
         <input type="hidden" name="id" value="${restaurant.id}">
         <dl>
             <dt>Name:</dt>
             <dd><input type="text" value="${restaurant.name}" name="name" required></dd>
         </dl>
-        <input type="hidden" name="mealList" value="${restaurant.mealList}">
         <dl>
             <dt>Description:</dt>
             <dd><input type="text" value="${restaurant.description}" name="description" required></dd>
