@@ -6,10 +6,11 @@
 <html>
 <head>
     <title>${restaurant.name}</title>
+    <base href="${pageContext.request.contextPath}/"/>
 </head>
 <body>
     <h1>${restaurant.name}</h1>
-    <a href="restaurantMeals?action=create&restaurantId=${restaurant.id}">Add Meal</a>
+    <a href="restaurants/${restaurant.id}/meals/create">Add Meal</a>
     <br><br>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
@@ -30,8 +31,8 @@
 
                 <td>${meal.name}</td>
                 <td>${meal.price}</td>
-                <td><a href="restaurantMeals?action=update&id=${meal.id}&restaurantId=${restaurant.id}">Update</a></td>
-                <td><a href="restaurantMeals?action=delete&id=${meal.id}&restaurantId=${restaurant.id}">Delete</a></td>
+                <td><a href="restaurants/${restaurant.id}/meals/update?id=${meal.id}">Update</a></td>
+                <td><a href="restaurants/${restaurant.id}/meals/delete?id=${meal.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

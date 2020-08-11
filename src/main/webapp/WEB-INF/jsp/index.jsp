@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Voter</title>
+    <base href="${pageContext.request.contextPath}/"/>
 </head>
 <body>
 <h1>Restaurant vote</h1>

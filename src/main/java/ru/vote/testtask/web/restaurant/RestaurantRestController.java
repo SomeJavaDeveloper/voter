@@ -1,44 +1,54 @@
 package ru.vote.testtask.web.restaurant;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.vote.testtask.model.Restaurant;
-import ru.vote.testtask.service.RestaurantService;
-import ru.vote.testtask.to.RestaurantTo;
-import ru.vote.testtask.util.RestaurantUtil;
 
+import java.net.URI;
 import java.util.List;
 
-@Controller
-public class RestaurantRestController {
+@RestController
+@RequestMapping(RestaurantRestController.REST_URL)
+public class RestaurantRestController extends AbstractRestaurantController{
 
-    private static final Logger log = LoggerFactory.getLogger(RestaurantRestController.class);
+    static final String REST_URL = "/rest/restaurants";
 
-    private final RestaurantService service;
-
-    public RestaurantRestController(RestaurantService service) {
-        this.service = service;
+    @Override
+    @GetMapping
+    public List<Restaurant> getAll(){
+        return super.getAll();
     }
 
-    public List<RestaurantTo> getAll(){
-        return RestaurantUtil.getTos(service.getAll());
+    @Override
+    @GetMapping("/{id}")
+    public Restaurant get(@PathVariable int id) {
+        return super.get(id);
     }
 
-    public void delete(int id){
-        log.info("delete() restaurants");
-        service.delete(id);
+    @Override
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable int id) {
+        super.delete(id);
     }
 
-    public Restaurant create(Restaurant restaurant){
-        return service.create(restaurant);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Restaurant> createRest(@RequestBody Restaurant restaurant) {
+        Restaurant created = super.create(restaurant);
+        URI uriOfNewMeal = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(REST_URL + "/{id}")
+                .buildAndExpand(created.getId()).toUri();
+        return ResponseEntity.created(uriOfNewMeal).body(created);
     }
 
-    public Restaurant update(Restaurant restaurant){
-        return service.update(restaurant);
-    }
-
-    public Restaurant get(int id){
-        return service.get(id);
-    }
+//    @Override
+//    @PutMapping("/{id}")
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    public void update(@RequestBody Meal meal, @PathVariable int id) {
+//        super.update(meal, id);
+//    }
+    //UPDATE METHOD
 }

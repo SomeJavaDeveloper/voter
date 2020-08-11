@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Meal</title>
+    <base href="${pageContext.request.contextPath}/"/>
 </head>
 <body>
 <section>
@@ -16,7 +17,7 @@
     <hr>
     <h2>${param.action == 'create' ? 'Create meal' : 'Edit meal'}</h2>
     <jsp:useBean id="meal" class="ru.vote.testtask.model.Meal" scope="request"/>
-    <form method="post" action="restaurantMeals">
+    <form method="post" action="/restaurants/${restaurantId}/meals">
         <input type="hidden" name="id" value="${meal.id}">
         <input type="hidden" name="restaurantId" value="${restaurant.id}">
         <dl>
