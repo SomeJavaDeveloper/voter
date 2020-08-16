@@ -35,6 +35,9 @@ public class JpaMealRepository implements MealRepository {
     @Override
     public Meal get(int restaurantId, int mealId) {
         Meal meal = em.find(Meal.class, mealId);
+
+        int idd = meal.getRestaurant().getId();
+
         return meal != null && meal.getRestaurant().getId() == restaurantId ? meal : null;
     }
 
@@ -42,10 +45,10 @@ public class JpaMealRepository implements MealRepository {
     @Transactional
     public Meal save(int restaurantId, Meal meal) {
         meal.setRestaurant(em.getReference(Restaurant.class, restaurantId));
-        if (meal.isNew()) {
+        if (meal.getId() == null) {
             em.persist(meal);
             return meal;
-        } else if (get(meal.id(), restaurantId) == null) {
+        } else if (get(restaurantId, meal.id()) == null) {
             return null;
         }
         return em.merge(meal);

@@ -3,7 +3,7 @@ package ru.vote.testtask.to;
 import ru.vote.testtask.model.Meal;
 
 import java.util.List;
-
+//remove all TO
 public class RestaurantTo {
 
     private final Integer id;
@@ -12,10 +12,13 @@ public class RestaurantTo {
 
     private final String description;
 
-    public RestaurantTo(Integer id, String name, String description) {
+    private List<Meal> meals;
+
+    public RestaurantTo(Integer id, String name, String description, List<Meal> meals) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.meals = meals;
     }
 
     public Integer getId() {
@@ -26,10 +29,14 @@ public class RestaurantTo {
         return name;
     }
 
-
     public String getDescription() {
         return description;
     }
+
+    public List<Meal> getMeals() {
+        return meals;
+    }
+
 
     @Override
     public String toString() {
@@ -37,6 +44,7 @@ public class RestaurantTo {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", meals=" + meals +
                 '}';
     }
 }

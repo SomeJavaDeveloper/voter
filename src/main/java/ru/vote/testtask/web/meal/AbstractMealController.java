@@ -7,6 +7,8 @@ import ru.vote.testtask.model.Meal;
 import ru.vote.testtask.model.Restaurant;
 import ru.vote.testtask.service.MealService;
 import ru.vote.testtask.service.RestaurantService;
+import ru.vote.testtask.to.MealTo;
+import ru.vote.testtask.util.MealUtil;
 
 import java.util.List;
 
@@ -25,9 +27,9 @@ public abstract class AbstractMealController {
         return restaurantService.get(restaurantId);
     }
 
-    public List<Meal> getAll(int restaurantId) {
+    public List<MealTo> getAll(int restaurantId) {
         log.info("get all meals of restaurant {}", restaurantId);
-        return mealService.getAll(restaurantId);
+        return MealUtil.getTos(mealService.getAll(restaurantId));
     }
 
     public Meal get(int restaurantId, int mealId) {

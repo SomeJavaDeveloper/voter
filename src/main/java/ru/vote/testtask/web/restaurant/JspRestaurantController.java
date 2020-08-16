@@ -1,5 +1,7 @@
 package ru.vote.testtask.web.restaurant;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,7 @@ public class JspRestaurantController extends AbstractRestaurantController{
     @GetMapping("/update")
     public String update(HttpServletRequest request, Model model) {
         model.addAttribute("restaurant", super.get(getId(request)));
+
         return "restaurantForm";
     }
 

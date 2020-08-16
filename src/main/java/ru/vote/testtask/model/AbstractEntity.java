@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public abstract class AbstractEntity{
+public abstract class AbstractEntity {
 
     @NotBlank
     @Size(min = 1, max = 100)
@@ -21,8 +21,6 @@ public abstract class AbstractEntity{
     public AbstractEntity(String name) {
         this.name = name;
     }
-
-    // doesn't work for hibernate lazy proxy
 
     public String getName() {
         return name;

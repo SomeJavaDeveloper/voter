@@ -2,47 +2,60 @@ package ru.vote.testtask.web.meal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.vote.testtask.model.Meal;
+import ru.vote.testtask.model.Restaurant;
 import ru.vote.testtask.service.MealService;
 import ru.vote.testtask.to.MealTo;
 import ru.vote.testtask.util.MealUtil;
+import ru.vote.testtask.web.restaurant.RestaurantRestController;
 
+import java.net.URI;
 import java.util.List;
 
-@Controller
-public class MealRestController {
+@RestController
+@RequestMapping(value = MealRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+public class MealRestController extends AbstractMealController {
 
-    private static final Logger log = LoggerFactory.getLogger(MealRestController.class);
+    static final String REST_URL = "/rest/restaurants/{restaurantId}/meals";
 
-    private final MealService service;
-
-    public MealRestController(MealService service) {
-        this.service = service;
+    @Override
+    @GetMapping
+    public List<MealTo> getAll(@PathVariable("restaurantId") int restaurantId) {
+        return super.getAll(restaurantId);
     }
 
-    public List<MealTo> getAll(int restaurantId) {
-        log.info("get all meals from restaurant with id=" + restaurantId);
-        return MealUtil.getTos(service.getAll(restaurantId));
+    @Override
+    @GetMapping("/{id}")
+    public Meal get(@PathVariable("restaurantId") int restaurantId, @PathVariable("id") int mealId) {
+        return super.get(restaurantId, mealId);
     }
 
-    public void delete(int mealId){
-        log.info("delete " + mealId);
-        service.delete(mealId);
+    @Override
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable("id") int mealId) {
+        super.delete(mealId);
     }
 
-    public Meal get(int restaurantId, int mealId){
-        log.info("get " + mealId + " from restaurant with id=" + restaurantId);
-        return service.get(restaurantId, mealId);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Meal> createMeal(@PathVariable("restaurantId") int restaurantId, @RequestBody Meal meal) {
+        Meal created = super.create(restaurantId, meal);
+        URI uriOfNewMeal = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(REST_URL + "/" + created.getId())
+                .buildAndExpand(created.getId()).toUri();
+        return ResponseEntity.created(uriOfNewMeal).body(created);
     }
 
-    public Meal create(int restaurantId, Meal meal){
-        log.info("crete " + meal + " for restaurant with id=" + restaurantId);
-        return service.create(restaurantId, meal);
-    }
-
-    public Meal update(int restaurantId, Meal meal){
-        log.info("update " +meal + " for restaurant with id=" + restaurantId);
-        return service.update(restaurantId, meal);
+    @Override
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public Meal update(@PathVariable("restaurantId") int restaurantId, @RequestBody Meal meal) {
+        return super.update(restaurantId, meal);
     }
 }

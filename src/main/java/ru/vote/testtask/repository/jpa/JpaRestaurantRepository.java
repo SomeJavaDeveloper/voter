@@ -18,7 +18,8 @@ public class JpaRestaurantRepository implements RestaurantRepository {
 
     @Override
     public List<Restaurant> getAll() {
-        return em.createNamedQuery(Restaurant.ALL_SORTED, Restaurant.class).getResultList();
+        List<Restaurant> restaurants = em.createNamedQuery(Restaurant.ALL_SORTED, Restaurant.class).getResultList();
+        return restaurants;
 //        return em.createQuery("SELECT r FROM " + Restaurant.class.getName() + " r", Restaurant.class).getResultList();
     }
 
@@ -33,7 +34,7 @@ public class JpaRestaurantRepository implements RestaurantRepository {
     @Override
     @Transactional
     public Restaurant save(Restaurant restaurant) {
-        if(restaurant.isNew()) {
+        if(restaurant.getId() == null) {
             em.persist(restaurant);
             return restaurant;
         } else {

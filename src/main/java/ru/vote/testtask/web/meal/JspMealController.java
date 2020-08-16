@@ -21,7 +21,7 @@ public class JspMealController extends AbstractMealController{
     public String getAll(HttpServletRequest request, Model model, @PathVariable("id") int restaurantId) {
         String uri = request.getRequestURI();
         model.addAttribute("restaurant", super.getRestaurant(restaurantId));
-        model.addAttribute("meals", MealUtil.getTos(super.getAll(restaurantId)));
+        model.addAttribute("meals", super.getAll(restaurantId));
         return "restaurantMeals";
     }
 

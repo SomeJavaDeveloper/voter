@@ -18,6 +18,7 @@
     <hr>
     <h2>${param.action == 'create' ? 'Create restaurant' : 'Edit restaurant'}</h2>
     <jsp:useBean id="restaurant" class="ru.vote.testtask.model.Restaurant" scope="request"/>
+
     <form method="post" action="restaurants">
         <input type="hidden" name="id" value="${restaurant.id}">
         <dl>

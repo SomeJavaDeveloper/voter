@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.vote.testtask.model.Restaurant;
 import ru.vote.testtask.service.RestaurantService;
+import ru.vote.testtask.to.RestaurantTo;
+import ru.vote.testtask.util.RestaurantUtil;
 
 import java.util.List;
 
@@ -20,9 +22,9 @@ public abstract class AbstractRestaurantController {
         return service.get(id);
     }
 
-    public List<Restaurant> getAll() {
-        log.info("get all restaurants");
-        return service.getAll();
+    public List<RestaurantTo> getAll() {
+        log.info("get all restaurants TO");
+        return RestaurantUtil.getTos(service.getAll());
     }
 
     public void delete(int id) {
@@ -35,9 +37,9 @@ public abstract class AbstractRestaurantController {
         return service.create(restaurant);
     }
 
-    public Restaurant update(Restaurant restaurant) {
+    public void update(Restaurant restaurant) {
         log.info("update {}", restaurant);
-        return service.update(restaurant);
+        service.update(restaurant);
     }
 
 

@@ -1,10 +1,15 @@
 package ru.vote.testtask.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.domain.Persistable;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Set;
 
 @NamedQueries({
         @NamedQuery(name = Restaurant.DELETE, query = "DELETE FROM Restaurant r WHERE r.id=:id"),
@@ -28,6 +33,10 @@ public class Restaurant extends AbstractEntity {
     @NotBlank
     private String description;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
+    @JsonManagedReference
+    private List<Meal> meals;
+
     public Restaurant() {
     }
 
@@ -41,6 +50,12 @@ public class Restaurant extends AbstractEntity {
         this.description = description;
     }
 
+    public Restaurant(Integer id, String name, String description, List<Meal> meals) {
+        super(name);
+        this.id = id;
+        this.description = description;
+        this.meals = meals;
+    }
 
     public String getDescription() {
         return description;
@@ -58,21 +73,16 @@ public class Restaurant extends AbstractEntity {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "Restaurant{" +
-                " description='" + description + '\'' +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
     public int id() {
         Assert.notNull(id, "Entity must has id");
         return id;
     }
 
-    public boolean isNew(){
-        return id == null;
+    public List<Meal> getMeals() {
+        return meals;
+    }
+
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
     }
 }
