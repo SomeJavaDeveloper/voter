@@ -19,7 +19,6 @@ import static ru.vote.testtask.RestaurantTestData.RESTAURANT1;
 @SpringJUnitConfig(locations = {
         "classpath:spring/spring-app.xml"
 })
-@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 class JpaMealServiceTest {
 
     @Autowired
