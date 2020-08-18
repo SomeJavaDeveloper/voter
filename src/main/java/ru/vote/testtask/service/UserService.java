@@ -26,11 +26,13 @@ public class UserService {
         return repository.get(userId);
     }
 
-    public User save(User user){
+    public User create(User user){
         return repository.save(user);
     }
 
     public User update(User user){
         return repository.save(user);
     }
+
+    public User getByEmail(String email) { return repository.getByEmail(email); }
 }

@@ -25,6 +25,12 @@ public class RootController {
         return "index";
     }
 
+    @GetMapping("/users")
+    public String getUsers(Model model) {
+        model.addAttribute("users", userService.getAll());
+        return "users";
+    }
+
     @PostMapping("/users")
     public String setUser(HttpServletRequest request) {
         int userId = Integer.parseInt(request.getParameter("userId"));
