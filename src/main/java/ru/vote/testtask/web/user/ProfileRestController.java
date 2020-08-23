@@ -2,8 +2,16 @@ package ru.vote.testtask.web.user;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.vote.testtask.model.User;
+import ru.vote.testtask.to.UserTo;
+import ru.vote.testtask.web.SecurityUtil;
+
+import javax.validation.Valid;
+import java.net.URI;
 
 import static ru.vote.testtask.web.SecurityUtil.authUserId;
 
@@ -14,6 +22,7 @@ public class ProfileRestController extends AbstractUserController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public User get() {
+        int id = SecurityUtil.authUserId();
         return super.get(authUserId());
     }
 
@@ -21,6 +30,15 @@ public class ProfileRestController extends AbstractUserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete() {
         super.delete(authUserId());
+    }
+
+    @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public ResponseEntity<User> register(@Valid @RequestBody UserTo userTo) {
+        User created = super.create(userTo);
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(REST_URL).build().toUri();
+        return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

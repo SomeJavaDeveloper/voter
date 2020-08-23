@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -26,12 +27,14 @@ import java.util.Objects;
 public class JspRestaurantController extends AbstractRestaurantController{
 
     @GetMapping("/delete")
+    @PreAuthorize("hasRole('ADMIN')")
     public String delete(HttpServletRequest request) {
         super.delete(getId(request));
         return "redirect:/restaurants";
     }
 
     @GetMapping("/update")
+    @PreAuthorize("hasRole('ADMIN')")
     public String update(HttpServletRequest request, Model model) {
         model.addAttribute("restaurant", super.get(getId(request)));
 
@@ -39,12 +42,14 @@ public class JspRestaurantController extends AbstractRestaurantController{
     }
 
     @GetMapping("/create")
+    @PreAuthorize("hasRole('ADMIN')")
     public String create(Model model) {
         model.addAttribute("restaurants", new Restaurant());
         return "restaurantForm";
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')") ///////////////////////////////////////////////////
     public String updateOrCreate (HttpServletRequest request) {
         Restaurant restaurant = new Restaurant(request.getParameter("name"),
                                 request.getParameter("description"));

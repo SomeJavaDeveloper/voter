@@ -15,10 +15,6 @@ import ru.vote.testtask.web.AbstractControllerTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static ru.vote.testtask.RestaurantTestData.*;
-import static ru.vote.testtask.web.AbstractControllerTest.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 class RestaurantRestControllerTest extends AbstractControllerTest {
 

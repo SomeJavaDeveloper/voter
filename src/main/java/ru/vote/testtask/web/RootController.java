@@ -1,6 +1,7 @@
 package ru.vote.testtask.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,22 +22,28 @@ public class RootController {
     private RestaurantService restaurantService;
 
     @GetMapping("/")
-    public String root(){
-        return "index";
+    public String root() {
+        return "redirect:restaurants";
     }
 
     @GetMapping("/users")
+    @PreAuthorize("hasRole('ADMIN')")
     public String getUsers(Model model) {
         model.addAttribute("users", userService.getAll());
         return "users";
     }
 
-    @PostMapping("/users")
-    public String setUser(HttpServletRequest request) {
-        int userId = Integer.parseInt(request.getParameter("userId"));
-        SecurityUtil.setAuthUserId(userId);
-        return "redirect:restaurants";
+    @GetMapping(value = "/login")
+    public String login() {
+        return "login";
     }
+
+//    @PostMapping("/users")
+//    public String setUser(HttpServletRequest request) {
+//        int userId = Integer.parseInt(request.getParameter("userId"));
+//        SecurityUtil.setAuthUserId(userId);
+//        return "redirect:restaurants";
+//    }
 
     @GetMapping("/restaurants")
     public String getRestaurants(Model model) {
