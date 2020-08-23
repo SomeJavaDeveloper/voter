@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.vote.testtask.model.User;
 import ru.vote.testtask.service.UserService;
 import ru.vote.testtask.to.UserTo;
+import ru.vote.testtask.util.UserUtil;
 
 import java.util.List;
 
@@ -31,9 +32,9 @@ public abstract class AbstractUserController {
         return service.create(user);
     }
 
-    public User create(UserTo user) {
-        log.info("create {}", user);
-        return service.create(user);
+    public User create(UserTo userTo) {
+        log.info("create from to {}", userTo);
+        return create(UserUtil.createNewFromTo(userTo));
     }
 
     public void delete(int id) {
