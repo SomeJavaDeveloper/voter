@@ -9,13 +9,11 @@
 <html>
 <head>
     <title>Restaurant</title>
-    <link rel="stylesheet" href="resources/css/style.css">
     <base href="${pageContext.request.contextPath}/"/>
 </head>
 <body>
 <section>
-    <h3><a href="index.html">Home</a></h3>
-    <hr>
+<jsp:include page="fragments/bodyHeader.jsp"/>
     <h2>${param.action == 'create' ? 'Create restaurant' : 'Edit restaurant'}</h2>
     <jsp:useBean id="restaurant" class="ru.vote.testtask.model.Restaurant" scope="request"/>
 

@@ -10,6 +10,7 @@
     <base href="${pageContext.request.contextPath}/"/>
 </head>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
     <h1>${restaurant.name}</h1>
     <sec:authorize access="isAuthenticated()">
         <sec:authorize access="hasRole('ADMIN')">

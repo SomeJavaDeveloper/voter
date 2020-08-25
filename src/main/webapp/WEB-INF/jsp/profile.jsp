@@ -3,9 +3,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
+<head>
     <title>Profile</title>
-    <link rel="stylesheet" href="resources/css/style.css">
     <base href="${pageContext.request.contextPath}/"/>
+</head>
 <body>
 <section>
     <%--<form:form class="form-group" modelAttribute="userTo" method="post" action="profile"--%>

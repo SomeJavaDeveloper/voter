@@ -6,25 +6,10 @@
 <html>
 <head>
     <title>Restaurant Vote</title>
-    <link rel="stylesheet" href="resources/css/style.css">
     <base href="${pageContext.request.contextPath}/"/>
 </head>
 <body>
-    <a href="profile">${userTo.name}</a>
-
-    <sec:authorize access="isAuthenticated()">
-        <form action="logout" method="post">
-            <sec:authorize access="hasRole('ADMIN')">
-                <a href="users">Users</a>
-            </sec:authorize>
-            <a href="profile"><sec:authentication property="principal.userTo.name"/> profile</a>
-            <button type="submit">
-                Logout
-            </button>
-        </form>
-    </sec:authorize>
-
-    <hr/>
+<jsp:include page="fragments/bodyHeader.jsp"/>
     <h2>Restaurants</h2>
     <br><br>
     <sec:authorize access="isAuthenticated()">

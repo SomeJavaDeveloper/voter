@@ -13,8 +13,7 @@
 </head>
 <body>
 <section>
-    <h3><a href="test.jsp">Home</a></h3>
-    <hr>
+<jsp:include page="fragments/bodyHeader.jsp"/>
     <h2>${param.action == 'create' ? 'Create meal' : 'Edit meal'}</h2>
     <jsp:useBean id="meal" class="ru.vote.testtask.model.Meal" scope="request"/>
     <form method="post" action="/restaurants/${restaurantId}/meals">

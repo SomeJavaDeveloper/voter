@@ -5,10 +5,10 @@
 <html>
 <head>
     <title>Users</title>
-    <link rel="stylesheet" href="resources/css/style.css">
     <base href="${pageContext.request.contextPath}/"/>
 </head>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 <h3><a href="index.html">Home</a></h3>
 <hr/>
 <h2>Users</h2>

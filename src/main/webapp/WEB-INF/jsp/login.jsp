@@ -3,9 +3,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
-<title>Login</title>
-<link rel="stylesheet" href="resources/css/style.css">
-<base href="${pageContext.request.contextPath}/"/>
+<head>
+    <title>Login</title>
+    <base href="${pageContext.request.contextPath}/"/>
+</head>
 <body>
     <div>
         <form action="spring_security_check" id="login_form" method="post">
