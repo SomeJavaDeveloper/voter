@@ -26,6 +26,8 @@ public class UserTo implements Serializable {
     @Size(min = 5, max = 32, message = "length must be between 5 and 32 characters")
     private String password;
 
+    private int restaurantId;
+
     public UserTo() {
     }
 
@@ -68,12 +70,22 @@ public class UserTo implements Serializable {
         this.email = email;
     }
 
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
     @Override
     public String toString() {
         return "UserTo{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", restaurantId=" + restaurantId +
                 '}';
     }
 }

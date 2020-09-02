@@ -9,8 +9,6 @@
 </head>
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
-<h3><a href="index.html">Home</a></h3>
-<hr/>
 <h2>Users</h2>
 <br><br>
 <table border="1" cellpadding="8" cellspacing="0">
@@ -20,6 +18,7 @@
         <th>Name</th>
         <th>Email</th>
         <th>Password</th>
+        <th>Restaurant id</th>
         <th></th>
         <th></th>
     </tr>
@@ -32,6 +31,7 @@
             <td>${user.name}</td>
             <td>${user.email}</td>
             <td>${user.password}</td>
+            <td>${user.restaurantId}</td>
             <td><a href="users/update?id=${user.id}">Update</a></td>
             <td><a href="users/delete?id=${user.id}">Delete</a></td>
         </tr>

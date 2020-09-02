@@ -67,7 +67,7 @@ public class UserService implements UserDetailsService {
     public void update(UserTo userTo) {
         User user = get(userTo.getId());
         User updatedUser = UserUtil.updateFromTo(user, userTo);
-        prepareAndSave(user);   // !! need only for JDBC implementation
+        prepareAndSave(updatedUser);   // !! need only for JDBC implementation
     }
 
 //    @CacheEvict(value = "users", allEntries = true)
@@ -89,5 +89,10 @@ public class UserService implements UserDetailsService {
 
     private User prepareAndSave(User user) {
         return repository.save(prepareToSave(user, passwordEncoder));
+    }
+
+    public void vote(int userId, int restaurantId) {
+        User user = get(userId);
+        repository.vote(user, restaurantId);
     }
 }

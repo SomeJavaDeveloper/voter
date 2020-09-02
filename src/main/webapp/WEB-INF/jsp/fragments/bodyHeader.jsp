@@ -4,6 +4,7 @@
 <div>
     <sec:authorize access="isAuthenticated()">
         <form action="logout" method="post">
+            <a href="/restaurants">Restaurants</a>
             <sec:authorize access="hasRole('ADMIN')">
                 <a href="users">Users</a>
             </sec:authorize>

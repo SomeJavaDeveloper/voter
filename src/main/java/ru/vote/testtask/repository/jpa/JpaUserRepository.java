@@ -9,6 +9,8 @@ import ru.vote.testtask.repository.UserRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Repository
@@ -53,5 +55,14 @@ public class JpaUserRepository implements UserRepository {
     @Override
     public List<User> getAll() {
         return em.createNamedQuery(User.ALL, User.class).getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void vote(User user, int restaurantId) {
+        if(LocalTime.now().compareTo(LocalTime.parse("11:00")) < 0) {
+            user.setRestaurantId(restaurantId);
+            em.merge(user);
+        }
     }
 }

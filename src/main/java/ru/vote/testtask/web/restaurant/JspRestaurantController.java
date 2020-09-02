@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.vote.testtask.model.Restaurant;
+import ru.vote.testtask.web.SecurityUtil;
 import ru.vote.testtask.web.restaurant.RestaurantRestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -60,6 +61,12 @@ public class JspRestaurantController extends AbstractRestaurantController{
             restaurant.setId(getId(request));
             super.update(restaurant);
         }
+        return "redirect:/restaurants";
+    }
+
+    @GetMapping("/vote")
+    public String vote(HttpServletRequest request) {
+        super.vote(SecurityUtil.authUserId(), getId(request));
         return "redirect:/restaurants";
     }
 

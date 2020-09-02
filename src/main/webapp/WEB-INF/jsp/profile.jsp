@@ -47,6 +47,7 @@
             <dt>Password:</dt>
             <dd><input type="password" value="${userTo.password}" name="password" required></dd>
         </dl>
+
         <button type="submit">Save</button>
         <button onclick="window.history.back()" type="button">Cancel</button>
     </form>

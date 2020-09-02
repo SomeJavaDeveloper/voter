@@ -59,10 +59,8 @@ public class User extends AbstractEntity{
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant_id", nullable = false)
-    private Restaurant restaurant;
+    @Column(name = "restaurant_id")
+    private int restaurantId;
 
     public User() {
     }
@@ -125,12 +123,12 @@ public class User extends AbstractEntity{
         this.roles = roles;
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
+    public int getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public Integer getId() {
@@ -144,12 +142,13 @@ public class User extends AbstractEntity{
     @Override
     public String toString() {
         return "User{" +
-                "password='" + password + '\'' +
+                "id=" + id +
+                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", enabled=" + enabled +
                 ", registered=" + registered +
                 ", roles=" + roles +
-                ", id=" + id +
+                ", restaurantId=" + restaurantId +
                 ", name='" + name + '\'' +
                 '}';
     }

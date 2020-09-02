@@ -22,6 +22,8 @@ public class UserUtil {
         user.setName(userTo.getName());
         user.setEmail(userTo.getEmail().toLowerCase());
         user.setPassword(userTo.getPassword());
+        ///////////////////////////////////////////////////////
+//        user.setRestaurantId(userTo.getRestaurantId());
         return user;
     }
 

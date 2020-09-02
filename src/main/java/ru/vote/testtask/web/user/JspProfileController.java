@@ -54,4 +54,5 @@ public class JspProfileController extends AbstractUserController {
             return "redirect:restaurants";
         }
     }
+
 }
