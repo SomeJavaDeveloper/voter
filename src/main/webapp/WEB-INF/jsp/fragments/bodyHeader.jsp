@@ -8,10 +8,10 @@
             <sec:authorize access="hasRole('ADMIN')">
                 <a href="users">Users</a>
             </sec:authorize>
-            <a href="profile"><sec:authentication property="principal.userTo.name"/></a>
-            <button type="submit">
-                Logout
-            </button>
+                <sec:authentication property="principal.userTo.name"/>
+                <button type="submit">
+                    Logout
+                </button>
         </form>
     </sec:authorize>
     <hr/>

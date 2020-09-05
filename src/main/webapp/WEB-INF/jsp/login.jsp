@@ -19,23 +19,5 @@
         </form>
     </div>
     <a href="profile/register">register</a>
-<div>
-        <p>
-            <button type="submit" onclick="login('user@yandex.ru', 'password')">
-                 User
-            </button>
-            <button type="submit" onclick="login('admin@gmail.com', 'admin')">
-                 Admin
-            </button>
-        </p>
-        <br/>
-    </div>
-<%--<script type="text/javascript">--%>
-<%--    function login(username, password) {--%>
-<%--        $('input[name="username"]').val(username);--%>
-<%--        $('input[name="password"]').val(password);--%>
-<%--        $("#login_form").submit();--%>
-<%--    }--%>
-<%--</script>--%>
 </body>
 </html>

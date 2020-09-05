@@ -1,9 +1,5 @@
 package ru.vote.testtask.to;
 
-import ru.vote.testtask.model.Meal;
-
-import java.util.List;
-
 public class MealTo {
 
     private final Integer id;

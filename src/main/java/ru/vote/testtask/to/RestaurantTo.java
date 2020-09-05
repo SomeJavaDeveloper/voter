@@ -3,7 +3,7 @@ package ru.vote.testtask.to;
 import ru.vote.testtask.model.Meal;
 
 import java.util.List;
-//remove all TO
+
 public class RestaurantTo {
 
     private final Integer id;
@@ -12,7 +12,7 @@ public class RestaurantTo {
 
     private final String description;
 
-    private List<Meal> meals;
+    private final List<Meal> meals;
 
     public RestaurantTo(Integer id, String name, String description, List<Meal> meals) {
         this.id = id;

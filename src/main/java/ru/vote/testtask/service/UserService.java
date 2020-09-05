@@ -6,15 +6,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.Assert;
 import ru.vote.testtask.AuthorizedUser;
 import ru.vote.testtask.model.User;
 import ru.vote.testtask.repository.UserRepository;
-import ru.vote.testtask.to.UserTo;
-import ru.vote.testtask.util.UserUtil;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 import static ru.vote.testtask.util.UserUtil.prepareToSave;
@@ -31,16 +27,11 @@ public class UserService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-//    @CacheEvict(value = "users", allEntries = true)
     public User create(User user) {
         Assert.notNull(user, "user must not be null");
         return prepareAndSave(user);
     }
 
-//    @CacheEvict(value = "users", allEntries = true)
-    public void delete(int id) {
-        repository.delete(id);
-    }
 
     public User get(int id) {
         return repository.get(id);
@@ -51,32 +42,22 @@ public class UserService implements UserDetailsService {
         return repository.getByEmail(email);
     }
 
-//    @Cacheable("users")
     public List<User> getAll() {
         return repository.getAll();
     }
 
-//    @CacheEvict(value = "users", allEntries = true)
-    public void update(User user) {
-        Assert.notNull(user, "user must not be null");
-        prepareAndSave(user);
-    }
+//    public void update(User user) {
+//        Assert.notNull(user, "user must not be null");
+//        prepareAndSave(user);
+//    }
 
-//    @CacheEvict(value = "users", allEntries = true)
-    @Transactional
-    public void update(UserTo userTo) {
-        User user = get(userTo.getId());
-        User updatedUser = UserUtil.updateFromTo(user, userTo);
-        prepareAndSave(updatedUser);   // !! need only for JDBC implementation
-    }
+//    @Transactional
+//    public void update(UserTo userTo) {
+//        User user = get(userTo.getId());
+//        User updatedUser = UserUtil.updateFromTo(user, userTo);
+//        prepareAndSave(updatedUser);
+//    }
 
-//    @CacheEvict(value = "users", allEntries = true)
-    @Transactional
-    public void enable(int id, boolean enabled) {
-        User user = get(id);
-        user.setEnabled(enabled);
-        repository.save(user);  // !! need only for JDBC implementation
-    }
 
     @Override
     public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {

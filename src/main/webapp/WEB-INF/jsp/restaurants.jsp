@@ -20,19 +20,14 @@
         <c:forEach items="${restaurants}" var="restaurant">
             <jsp:useBean id="restaurant" type="ru.vote.testtask.to.RestaurantTo"/>
 
-<%--            <h3><a href="restaurants/meals?restaurantId=${restaurant.id}">${restaurant.name}</a></h3>--%>
             <h3><a href="restaurants/${restaurant.id}/meals">${restaurant.name}</a></h3>
             <p>${restaurant.description}</p>
-
-<%--            только админ--%>
             <sec:authorize access="isAuthenticated()">
                     <sec:authorize access="hasRole('ADMIN')">
                         <a href="restaurants/update?id=${restaurant.id}">Update</a>
                         <a href="restaurants/delete?id=${restaurant.id}">Delete</a>
                     </sec:authorize>
             </sec:authorize>
-
-<%--            для всех--%>
             <a href="restaurants/vote?id=${restaurant.id}">Vote</a>
             <br>
         </c:forEach>

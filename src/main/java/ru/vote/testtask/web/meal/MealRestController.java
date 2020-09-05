@@ -1,19 +1,12 @@
 package ru.vote.testtask.web.meal;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.vote.testtask.model.Meal;
-import ru.vote.testtask.model.Restaurant;
-import ru.vote.testtask.service.MealService;
 import ru.vote.testtask.to.MealTo;
-import ru.vote.testtask.util.MealUtil;
-import ru.vote.testtask.web.restaurant.RestaurantRestController;
 
 import java.net.URI;
 import java.util.List;

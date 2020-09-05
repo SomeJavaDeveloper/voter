@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface MealRepository {
 
-    public List<Meal> getAll(int restaurantId);
+    List<Meal> getAll(int restaurantId);
 
-    public boolean delete(int mealId);
+    boolean delete(int mealId);
 
-    public Meal get(int restaurantId, int mealId);
+    Meal get(int restaurantId, int mealId);
 
-    public Meal save(int restaurantId, Meal meal);
+    Meal save(int restaurantId, Meal meal);
 
 }

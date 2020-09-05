@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.vote.testtask.model.Meal;
-import ru.vote.testtask.model.Restaurant;
-import ru.vote.testtask.util.MealUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
@@ -19,8 +17,7 @@ import java.util.Objects;
 public class JspMealController extends AbstractMealController{
 
     @GetMapping
-    public String getAll(HttpServletRequest request, Model model, @PathVariable("id") int restaurantId) {
-        String uri = request.getRequestURI();
+    public String getAll(Model model, @PathVariable("id") int restaurantId) {
         model.addAttribute("restaurant", super.getRestaurant(restaurantId));
         model.addAttribute("meals", super.getAll(restaurantId));
         return "restaurantMeals";
@@ -43,7 +40,7 @@ public class JspMealController extends AbstractMealController{
 
     @GetMapping("/create")
     @PreAuthorize("hasRole('ADMIN')")
-    public String create(HttpServletRequest request, Model model, @PathVariable("id") int restaurantId) {
+    public String create(Model model, @PathVariable("id") int restaurantId) {
         model.addAttribute("meal", new Meal());
         model.addAttribute("restaurantId", restaurantId);
         return "mealForm";

@@ -37,20 +37,20 @@ public abstract class AbstractUserController {
         return create(UserUtil.createNewFromTo(userTo));
     }
 
-    public void delete(int id) {
-        log.info("delete {}", id);
-        service.delete(id);
-    }
+//    public void delete(int id) {
+//        log.info("delete {}", id);
+//        service.delete(id);
+//    }
 
-    public void update(User user, int id) {
-        log.info("update {} with id={}", user, id);
-        service.update(user);
-    }
-
-    public void update(UserTo user, int id) {
-        log.info("update {} with id={}", user, id);
-        service.update(user);
-    }
+//    public void update(User user, int id) {
+//        log.info("update {} with id={}", user, id);
+//        service.update(user);
+//    }
+//
+//    public void update(UserTo user, int id) {
+//        log.info("update {} with id={}", user, id);
+//        service.update(user);
+//    }
 
     public User getByMail(String email) {
         log.info("getByEmail {}", email);

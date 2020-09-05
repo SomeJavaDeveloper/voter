@@ -1,8 +1,9 @@
 package ru.vote.testtask.model;
 
-import org.springframework.util.Assert;
-
-import javax.persistence.*;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 

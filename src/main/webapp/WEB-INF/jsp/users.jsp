@@ -19,8 +19,6 @@
         <th>Email</th>
         <th>Password</th>
         <th>Restaurant id</th>
-        <th></th>
-        <th></th>
     </tr>
     </thead>
     <c:forEach items="${users}" var="user">
@@ -32,8 +30,6 @@
             <td>${user.email}</td>
             <td>${user.password}</td>
             <td>${user.restaurantId}</td>
-            <td><a href="users/update?id=${user.id}">Update</a></td>
-            <td><a href="users/delete?id=${user.id}">Delete</a></td>
         </tr>
     </c:forEach>
 </table>

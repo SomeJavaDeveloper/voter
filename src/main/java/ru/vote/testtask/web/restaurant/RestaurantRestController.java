@@ -1,7 +1,5 @@
 package ru.vote.testtask.web.restaurant;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +28,6 @@ public class RestaurantRestController extends AbstractRestaurantController{
     public Restaurant get(@PathVariable int id) {
 
         return super.get(id);
-//        return super.get(id);
     }
 
 

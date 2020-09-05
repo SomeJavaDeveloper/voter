@@ -7,7 +7,7 @@ import ru.vote.testtask.repository.RestaurantRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.*;
+import java.util.List;
 
 @Repository
 @Transactional(readOnly = true)
@@ -18,9 +18,7 @@ public class JpaRestaurantRepository implements RestaurantRepository {
 
     @Override
     public List<Restaurant> getAll() {
-        List<Restaurant> restaurants = em.createNamedQuery(Restaurant.ALL_SORTED, Restaurant.class).getResultList();
-        return restaurants;
-//        return em.createQuery("SELECT r FROM " + Restaurant.class.getName() + " r", Restaurant.class).getResultList();
+        return em.createNamedQuery(Restaurant.ALL_SORTED, Restaurant.class).getResultList();
     }
 
     @Override
@@ -47,6 +45,5 @@ public class JpaRestaurantRepository implements RestaurantRepository {
     public Restaurant get(int id) {
         return em.find(Restaurant.class, id);
     }
-
 
 }

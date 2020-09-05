@@ -3,12 +3,10 @@ package ru.vote.testtask.web.user;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.vote.testtask.model.User;
 import ru.vote.testtask.to.UserTo;
-import ru.vote.testtask.web.SecurityUtil;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -22,15 +20,14 @@ public class ProfileRestController extends AbstractUserController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public User get() {
-        int id = SecurityUtil.authUserId();
         return super.get(authUserId());
     }
 
-    @DeleteMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete() {
-        super.delete(authUserId());
-    }
+//    @DeleteMapping
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    public void delete() {
+//        super.delete(authUserId());
+//    }
 
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
@@ -41,14 +38,10 @@ public class ProfileRestController extends AbstractUserController {
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody User user) {
-        super.update(user, authUserId());
-    }
+//    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    public void update(@RequestBody User user) {
+//        super.update(user, authUserId());
+//    }
 
-    @GetMapping(value = "/text")
-    public String testUTF() {
-        return "Русский текст";
-    }
 }

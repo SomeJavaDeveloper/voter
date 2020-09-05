@@ -9,7 +9,6 @@ import ru.vote.testtask.repository.UserRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -27,15 +26,11 @@ public class JpaUserRepository implements UserRepository {
             em.persist(user);
             return user;
         } else {
-            return em.merge(user);
+            User updaterUser = get(user.getId());
+            updaterUser.setEmail(user.getEmail());
+            updaterUser.setName(user.getName());
+            return em.merge(updaterUser);
         }
-    }
-
-    @Override
-    public boolean delete(int id) {
-        return em.createNamedQuery(User.DELETE, User.class)
-                    .setParameter("id", id)
-                    .executeUpdate() != 0;
     }
 
     @Override

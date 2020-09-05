@@ -5,21 +5,18 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import ru.vote.testtask.service.RestaurantService;
 import ru.vote.testtask.service.UserService;
 import ru.vote.testtask.util.RestaurantUtil;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class RootController {
 
     @Autowired
-    private UserService userService;
+    private RestaurantService restaurantService;
 
     @Autowired
-    private RestaurantService restaurantService;
+    private UserService userService;
 
     @GetMapping("/")
     public String root() {
@@ -37,13 +34,6 @@ public class RootController {
     public String login() {
         return "login";
     }
-
-//    @PostMapping("/users")
-//    public String setUser(HttpServletRequest request) {
-//        int userId = Integer.parseInt(request.getParameter("userId"));
-//        SecurityUtil.setAuthUserId(userId);
-//        return "redirect:restaurants";
-//    }
 
     @GetMapping("/restaurants")
     public String getRestaurants(Model model) {

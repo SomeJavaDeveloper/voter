@@ -1,8 +1,6 @@
 package ru.vote.testtask.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import ru.vote.testtask.model.Restaurant;
-import ru.vote.testtask.service.MealService;
 import ru.vote.testtask.to.RestaurantTo;
 
 import java.util.Collection;

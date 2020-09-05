@@ -1,6 +1,5 @@
 package ru.vote.testtask.web.user;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,19 +35,19 @@ public class AdminRestController extends AbstractUserController{
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
-    @Override
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable int id) {
-        super.delete(id);
-    }
+//    @Override
+//    @DeleteMapping("/{id}")
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    public void delete(@PathVariable int id) {
+//        super.delete(id);
+//    }
 
-    @Override
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void update(@RequestBody User user, @PathVariable int id) {
-        super.update(user, id);
-    }
+//    @Override
+//    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+//    public void update(@RequestBody User user, @PathVariable int id) {
+//        super.update(user, id);
+//    }
 
     @GetMapping("/by")
     public User getByMail(@RequestParam String email) {

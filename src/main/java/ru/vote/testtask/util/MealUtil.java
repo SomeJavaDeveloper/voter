@@ -3,11 +3,8 @@ package ru.vote.testtask.util;
 import ru.vote.testtask.model.Meal;
 import ru.vote.testtask.to.MealTo;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 

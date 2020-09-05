@@ -63,7 +63,7 @@
 </build>
 
 <dependencies>
-    <!-- Logging with SLF4J & LogBack -->
+<!--     Logging with SLF4J & LogBack -->
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>

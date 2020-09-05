@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ModelInterceptor extends HandlerInterceptorAdapter {
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
         if (modelAndView != null && !modelAndView.isEmpty()) {
             AuthorizedUser authorizedUser = SecurityUtil.safeGet();
             if (authorizedUser != null) {
