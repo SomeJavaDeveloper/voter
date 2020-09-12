@@ -1,13 +1,10 @@
 package ru.vote.testtask;
 
-import java.util.ArrayList;
+import ru.vote.testtask.model.Restaurant;
+
 import java.util.Arrays;
 import java.util.List;
 
-import ru.vote.testtask.model.Meal;
-import ru.vote.testtask.model.Restaurant;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class RestaurantTestData {
 

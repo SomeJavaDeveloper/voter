@@ -64,8 +64,8 @@ public class User extends AbstractEntity{
     public User() {
     }
 
-    public User(String name, String password, String email, boolean enabled, Date registered, Set<Role> roles) {
-        this(null, name, password, email, enabled, registered, roles);
+    public User(String name, String password, String email, Role role, Role... roles) {
+        this(null, name, password, email, true, new Date(), EnumSet.of(role, roles));
     }
 
     public User(Integer id, String name, String password, String email, boolean enabled, Date registered, Set<Role> roles) {
@@ -124,6 +124,18 @@ public class User extends AbstractEntity{
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Date getRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(Date registered) {
+        this.registered = registered;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override

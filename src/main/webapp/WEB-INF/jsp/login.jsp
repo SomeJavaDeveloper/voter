@@ -11,7 +11,7 @@
     <div>
         <form action="spring_security_check" id="login_form" method="post">
             <h3>Login</h3>
-            <p><input type="text" name="username"></p>
+            <p><input type="email" name="username"></p>
             <p><input type="password" name="password"></p>
             <button type="submit">
                 Submit

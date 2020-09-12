@@ -15,7 +15,7 @@ public class UserTestData {
     public static final User[] USERS_ARRAY = {USER, ADMIN};
 
     public static User getNew() {
-        return new User(null, "New user", "password","new_user@rambler.ru",  Role.USER);
+        return new User("New user", "password","new_user@rambler.ru",  Role.USER);
     }
 
     public static User getUpdated() {
