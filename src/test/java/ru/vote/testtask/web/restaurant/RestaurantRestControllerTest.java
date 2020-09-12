@@ -1,19 +1,16 @@
 package ru.vote.testtask.web.restaurant;
 
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.vote.testtask.model.Restaurant;
 import ru.vote.testtask.service.RestaurantService;
-import ru.vote.testtask.util.exception.NotFoundException;
 import ru.vote.testtask.web.AbstractControllerTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static ru.vote.testtask.RestaurantTestData.*;
 
 class RestaurantRestControllerTest extends AbstractControllerTest {
@@ -52,7 +49,6 @@ class RestaurantRestControllerTest extends AbstractControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andReturn();
         assertEquals(204, result.getResponse().getStatus());
-        Restaurant r = service.get(RESTAURANT1.getId());
         assertNull(service.get(RESTAURANT1.getId()));
     }
 

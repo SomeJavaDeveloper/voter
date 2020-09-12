@@ -1,9 +1,9 @@
 package ru.vote.testtask;
 
+import ru.vote.testtask.model.Meal;
+
 import java.util.Arrays;
 import java.util.List;
-import ru.vote.testtask.model.Meal;
-import ru.vote.testtask.model.Restaurant;
 
 public class MealTestData {
 

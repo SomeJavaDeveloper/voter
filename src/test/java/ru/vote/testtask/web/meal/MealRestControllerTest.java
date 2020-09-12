@@ -6,15 +6,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.vote.testtask.model.Meal;
-import ru.vote.testtask.model.Restaurant;
 import ru.vote.testtask.service.MealService;
 import ru.vote.testtask.web.AbstractControllerTest;
-import ru.vote.testtask.web.restaurant.RestaurantRestController;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static ru.vote.testtask.MealTestData.*;
-import static org.junit.jupiter.api.Assertions.*;
-import static ru.vote.testtask.MealTestData.getNew;
-import static ru.vote.testtask.MealTestData.getUpdated;
 
 class MealRestControllerTest extends AbstractControllerTest {
 
